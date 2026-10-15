@@ -1,0 +1,24 @@
+name: CI - Run Health Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x *.sh
+
+      - name: Run health_check.sh
+        run: ./health_check.sh
+
+      - name: Run disk_alert.sh
+        run: ./disk_alert.sh
